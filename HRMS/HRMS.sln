@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.WebApi", "HRMS.WebApi\HRMS.WebApi.csproj", "{6F5EA5FC-9C48-4D8B-A602-7FDBD55B8FE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRMS.WebApi", "HRMS.WebApi\HRMS.WebApi.csproj", "{6F5EA5FC-9C48-4D8B-A602-7FDBD55B8FE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.DAL", "HRMS.DAL\HRMS.DAL.csproj", "{30CAE9F1-022C-4A81-B947-D91A785CEE4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRMS.BLL", "HRMS.BLL\HRMS.BLL.csproj", "{09716D57-28E7-4D19-BAE2-847B04354DEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{6F5EA5FC-9C48-4D8B-A602-7FDBD55B8FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F5EA5FC-9C48-4D8B-A602-7FDBD55B8FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F5EA5FC-9C48-4D8B-A602-7FDBD55B8FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30CAE9F1-022C-4A81-B947-D91A785CEE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30CAE9F1-022C-4A81-B947-D91A785CEE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30CAE9F1-022C-4A81-B947-D91A785CEE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30CAE9F1-022C-4A81-B947-D91A785CEE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09716D57-28E7-4D19-BAE2-847B04354DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09716D57-28E7-4D19-BAE2-847B04354DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09716D57-28E7-4D19-BAE2-847B04354DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09716D57-28E7-4D19-BAE2-847B04354DEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
