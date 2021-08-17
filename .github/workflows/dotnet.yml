@@ -18,8 +18,9 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore HRMS/HRMS.sln
+      run: dotnet restore
+      working-directory: HRMS/
     - name: Build
-      run: dotnet build HRMS/HRMS.sln --no-restore
+      run: dotnet build --no-restore
     - name: WebApi
-      run: dotnet test HRMS/HRMS.sln --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
