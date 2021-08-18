@@ -1,4 +1,4 @@
-﻿using HRMS.DAL.DataContext;
+using HRMS.DAL.DataContext;
 using HRMS.DAL.Entities;
 using HRMS.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +39,15 @@ namespace HRMS.DAL.Functions
                 employees = await context.Employees.ToListAsync();
             }
             return employees;
+        }
+        public async Task<Employee> GetEmployee(int id)
+        {
+            Employee employee = new Employee();
+            using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
+            {
+                employee = await context.Employees.FindAsync(id);
+            }
+            return employee;
         }
 
         public async Task<Employee> PutEmployee(int id, Employee employee)

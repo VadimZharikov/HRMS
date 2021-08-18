@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +8,7 @@ using HRMS.DAL.Interfaces;
 
 namespace HRMS.BLL.EmployeeLogic
 {
-    class EmployeeLogic
+    public class EmployeeLogic
     {
         private IEmployee _employee = new DAL.Functions.EmployeeFunctions();
 
@@ -28,19 +28,39 @@ namespace HRMS.BLL.EmployeeLogic
                 return false;
             }
         }
+      
         public async Task<List<Employee>> GetEmployees()
         {
             List<Employee> employees = await _employee.GetEmployees();
             return employees;
         }
 
+        public async Task<Employee> GetEmployee(int id)
+        {
+            Employee employee = await _employee.GetEmployee(id);
+            return employee;
+        }
+
         public async Task<bool> PutEmployee(int id, Employee employee)
         {
-            if (employee.EmployeeId == id && await _employee.EmployeeExists(id))
+            if (id != employee.EmployeeId)
             {
-                return true;
+                return false;
             }
-            return false;
+
+            try
+            {
+                var result = await _employee.PutEmployee(id, employee);
+                if (result.EmployeeId > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public async Task<bool> DeleteEmployee(int id)
