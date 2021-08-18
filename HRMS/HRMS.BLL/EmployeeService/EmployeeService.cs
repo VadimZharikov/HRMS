@@ -11,8 +11,6 @@ namespace HRMS.BLL.EmployeeService
 {
     public class EmployeeService : IEmployeeService
     {
-        /*private IEmployee _employee = new DAL.Repository.EmployeeRepository();*/
-
         private IEmployeeRepository employee;
         private IMapper _mapper;
 

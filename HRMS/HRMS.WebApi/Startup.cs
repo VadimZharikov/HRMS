@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using HRMS.WebApi.Mapper;
+using HRMS.DAL.DataContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace HRMS.WebApi
 {
@@ -33,6 +35,7 @@ namespace HRMS.WebApi
             services.AddAutoMapper(mc =>
             mc.AddProfile(new MappingProfile())
             );
+            services.AddDbContext<DatabaseContext>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
