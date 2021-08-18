@@ -33,6 +33,6 @@ namespace HRMS.DAL.DataContext
 
         }
 
-        DbSet<Employee> Employees { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
