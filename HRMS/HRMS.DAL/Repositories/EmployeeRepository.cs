@@ -2,19 +2,16 @@ using HRMS.DAL.DataContext;
 using HRMS.DAL.Entities;
 using HRMS.DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace HRMS.DAL.Functions
+namespace HRMS.DAL.Repositories
 {
-    public class EmployeeFunctions : IEmployee
+    public class EmployeeRepository : IEmployeeRepository
     {
-        public async Task<Employee> AddEmployee(string name, string surname, int age, string sex, string position, string phone)
+        public async Task<EmployeeEntity> AddEmployee(string name, string surname, int age, string sex, string position, string phone)
         {
-            Employee newEmployee = new Employee
+            EmployeeEntity newEmployee = new EmployeeEntity
             {
                 Name = name,
                 Surname = surname,
@@ -31,18 +28,18 @@ namespace HRMS.DAL.Functions
             return newEmployee;
         }
 
-        public async Task<List<Employee>> GetEmployees()
+        public async Task<List<EmployeeEntity>> GetEmployees()
         {
-            List<Employee> employees = new List<Employee>();
+            List<EmployeeEntity> employees = new List<EmployeeEntity>();
             using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
             {
                 employees = await context.Employees.ToListAsync();
             }
             return employees;
         }
-        public async Task<Employee> GetEmployee(int id)
+        public async Task<EmployeeEntity> GetEmployee(int id)
         {
-            Employee employee = new Employee();
+            EmployeeEntity employee = new EmployeeEntity();
             using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
             {
                 employee = await context.Employees.FindAsync(id);
@@ -50,7 +47,7 @@ namespace HRMS.DAL.Functions
             return employee;
         }
 
-        public async Task<Employee> PutEmployee(int id, Employee employee)
+        public async Task<EmployeeEntity> PutEmployee(int id, EmployeeEntity employee)
         {
             using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
             {
@@ -59,7 +56,7 @@ namespace HRMS.DAL.Functions
                 return employee;
             }
         }
-        public async Task<Employee> DeleteEmployee(int id)
+        public async Task<EmployeeEntity> DeleteEmployee(int id)
         {
             using (var context = new DatabaseContext(DatabaseContext.ops.dbOptions))
             {

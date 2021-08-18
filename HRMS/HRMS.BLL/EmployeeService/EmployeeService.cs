@@ -1,22 +1,32 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using HRMS.DAL.Entities;
+using HRMS.BLL.Interfaces;
 using HRMS.DAL.Interfaces;
+using HRMS.BLL.Entities;
+using AutoMapper;
+using HRMS.DAL.Entities;
 
-namespace HRMS.BLL.EmployeeLogic
+namespace HRMS.BLL.EmployeeService
 {
-    public class EmployeeLogic
+    public class EmployeeService : IEmployeeService
     {
-        private IEmployee _employee = new DAL.Functions.EmployeeFunctions();
+        /*private IEmployee _employee = new DAL.Repository.EmployeeRepository();*/
+
+        private IEmployeeRepository employee;
+        private IMapper _mapper;
+
+        public EmployeeService(IEmployeeRepository _employee, IMapper mapper)
+        {
+            this.employee = _employee;
+            this._mapper = mapper;
+        }
 
         public async Task<bool> AddEmployee(string name, string surname, int age, string sex, string position, string phone)
         {
             try
             {
-                var result = await _employee.AddEmployee(name, surname, age, sex, position, phone);
+                var result = await employee.AddEmployee(name, surname, age, sex, position, phone);
                 if(result.EmployeeId > 0)
                 {
                     return true;
@@ -31,14 +41,14 @@ namespace HRMS.BLL.EmployeeLogic
       
         public async Task<List<Employee>> GetEmployees()
         {
-            List<Employee> employees = await _employee.GetEmployees();
+            List<Employee> employees = _mapper.Map<List<EmployeeEntity>, List<Employee>>(await employee.GetEmployees());
             return employees;
         }
 
         public async Task<Employee> GetEmployee(int id)
         {
-            Employee employee = await _employee.GetEmployee(id);
-            return employee;
+            Employee newEmployee = _mapper.Map<EmployeeEntity, Employee>(await employee.GetEmployee(id));
+            return newEmployee;
         }
 
         public async Task<bool> PutEmployee(int id, Employee employee)
@@ -50,7 +60,7 @@ namespace HRMS.BLL.EmployeeLogic
 
             try
             {
-                var result = await _employee.PutEmployee(id, employee);
+                var result = await this.employee.PutEmployee(id, _mapper.Map<Employee, EmployeeEntity>(employee));
                 if (result.EmployeeId > 0)
                 {
                     return true;
@@ -67,7 +77,7 @@ namespace HRMS.BLL.EmployeeLogic
         {
             try
             {
-                var result = await _employee.DeleteEmployee(id);
+                var result = await employee.DeleteEmployee(id);
                 if (result.EmployeeId > 0)
                 {
                     return true;
