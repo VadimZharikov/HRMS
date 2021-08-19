@@ -1,16 +1,11 @@
-using HRMS.BLL.EmployeeService;
-using HRMS.BLL.Interfaces;
-using HRMS.DAL.Interfaces;
-using HRMS.DAL.Repositories;
+using HRMS.BLL.DI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using HRMS.WebApi.Mapper;
-using HRMS.DAL.DataContext;
-using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace HRMS.WebApi
 {
@@ -32,12 +27,9 @@ namespace HRMS.WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HRMS.WebApi", Version = "v1" });
             });
 
-            services.AddAutoMapper(mc =>
-            mc.AddProfile(new MappingProfile())
+            services.AddAutoMapper(Assembly.Load("HRMS.BLL"), Assembly.Load("HRMS.WebApi")
             );
-            services.AddDbContext<DatabaseContext>(op => op.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IEmployeeService, EmployeeService>();
-            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddBusinessLogic(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,7 +7,7 @@ using HRMS.BLL.Entities;
 using AutoMapper;
 using HRMS.DAL.Entities;
 
-namespace HRMS.BLL.EmployeeService
+namespace HRMS.BLL.Services
 {
     public class EmployeeService : IEmployeeService
     {
