@@ -22,19 +22,12 @@ namespace HRMS.BLL.Services
 
         public async Task<bool> AddEmployee(string name, string surname, int age, string sex, string position, string phone)
         {
-            try
+            var result = await employee.AddEmployee(name, surname, age, sex, position, phone);
+            if(result.EmployeeId > 0)
             {
-                var result = await employee.AddEmployee(name, surname, age, sex, position, phone);
-                if(result.EmployeeId > 0)
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-            catch(Exception ex)
-            {
-                return false;
-            }
+            return false;
         }
       
         public async Task<List<Employee>> GetEmployees()
@@ -56,36 +49,22 @@ namespace HRMS.BLL.Services
                 return false;
             }
 
-            try
+            var result = await this.employee.PutEmployee(id, _mapper.Map<Employee, EmployeeEntity>(employee));
+            if (result.EmployeeId > 0)
             {
-                var result = await this.employee.PutEmployee(id, _mapper.Map<Employee, EmployeeEntity>(employee));
-                if (result.EmployeeId > 0)
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            return false;
         }
 
         public async Task<bool> DeleteEmployee(int id)
         {
-            try
+            var result = await employee.DeleteEmployee(id);
+            if (result.EmployeeId > 0)
             {
-                var result = await employee.DeleteEmployee(id);
-                if (result.EmployeeId > 0)
-                {
-                    return true;
-                }
-                return false;
+                return true;
             }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

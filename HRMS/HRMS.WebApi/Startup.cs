@@ -1,4 +1,5 @@
 using HRMS.BLL.DI;
+using HRMS.WebApi.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace HRMS.WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HRMS.WebApi", Version = "v1" });
             });
 
+            services.AddLogging();
             services.AddAutoMapper(Assembly.Load("HRMS.BLL"), Assembly.Load("HRMS.WebApi")
             );
             services.AddBusinessLogic(Configuration);
@@ -41,6 +43,7 @@ namespace HRMS.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HRMS.WebApi v1"));
             }
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 
