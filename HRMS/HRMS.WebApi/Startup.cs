@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace HRMS.WebApi
 {
@@ -31,6 +33,8 @@ namespace HRMS.WebApi
             services.AddLogging();
             services.AddAutoMapper(Assembly.Load("HRMS.BLL"), Assembly.Load("HRMS.WebApi")
             );
+            services.AddFluentValidation();
+            services.AddValidatorsFromAssembly(Assembly.Load("HRMS.WebApi"));
             services.AddBusinessLogic(Configuration);
         }
 
