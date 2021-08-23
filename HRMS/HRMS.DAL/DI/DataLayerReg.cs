@@ -12,6 +12,7 @@ namespace HRMS.DAL.DI
         public static void AddDataRepository(IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<DatabaseContext>(op => op.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
     }

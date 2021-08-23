@@ -9,6 +9,7 @@ namespace HRMS.BLL.DI
     {
         public static void AddBusinessLogic(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
             DAL.DI.DataLayerReg.AddDataRepository(services, configuration);
         }

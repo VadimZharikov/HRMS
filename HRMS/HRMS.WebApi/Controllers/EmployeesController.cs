@@ -40,9 +40,9 @@ namespace HRMS.WebApi.Controllers
 
         // POST api/<EmployeesController>
         [HttpPost]
-        public async Task<bool> Post(string name, string surname, int age, string sex, string position, string phone)
+        public async Task<bool> Post(string name, string surname, int age, string sex, string position, string phone, int departmentId)
         {
-            bool result = await employeeService.AddEmployee(name, surname, age, sex, position, phone);
+            bool result = await employeeService.AddEmployee(name, surname, age, sex, position, phone, departmentId);
             return result;
         }
 

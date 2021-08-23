@@ -10,6 +10,8 @@ namespace HRMS.BLL.Mapper
         {
             CreateMap <EmployeeEntity, Employee>();
             CreateMap <Employee, EmployeeEntity> ();
+            CreateMap<Department, DepartmentEntity>();
+            CreateMap<DepartmentEntity, Department>();
         }
     }
 }

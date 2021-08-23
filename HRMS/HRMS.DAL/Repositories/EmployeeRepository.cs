@@ -16,7 +16,7 @@ namespace HRMS.DAL.Repositories
             this._context = context;
         }
 
-        public async Task<EmployeeEntity> AddEmployee(string name, string surname, int age, string sex, string position, string phone)
+        public async Task<EmployeeEntity> AddEmployee(string name, string surname, int age, string sex, string position, string phone, int departmentId)
         {
             EmployeeEntity newEmployee = new EmployeeEntity
             {
@@ -25,7 +25,8 @@ namespace HRMS.DAL.Repositories
                 Age = age,
                 Sex = sex,
                 Position = position,
-                Phone = phone
+                Phone = phone,
+                DepartmentId = departmentId
             };
             await _context.Employees.AddAsync(newEmployee);
             await _context.SaveChangesAsync();
