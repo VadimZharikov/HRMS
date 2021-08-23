@@ -35,9 +35,9 @@ namespace HRMS.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<bool> Post(string departmentName)
+        public async Task<bool> Post(DepartmentViewModel department)
         {
-            bool result = await departmentService.AddDepartment(departmentName);
+            bool result = await departmentService.AddDepartment(_mapper.Map<DepartmentViewModel, Department>(department));
             return result;
         }
 

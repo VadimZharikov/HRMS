@@ -20,9 +20,9 @@ namespace HRMS.BLL.Services
             this._mapper = mapper;
         }
 
-        public async Task<bool> AddEmployee(string name, string surname, int age, string sex, string position, string phone, int departmentId)
+        public async Task<bool> AddEmployee(Employee employee)
         {
-            var result = await employee.AddEmployee(name, surname, age, sex, position, phone, departmentId);
+            var result = await this.employee.AddEmployee(_mapper.Map<Employee, EmployeeEntity>(employee));
             if(result.EmployeeId > 0)
             {
                 return true;

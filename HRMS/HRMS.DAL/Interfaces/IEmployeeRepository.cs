@@ -6,7 +6,7 @@ namespace HRMS.DAL.Interfaces
 {
     public interface IEmployeeRepository
     {
-        Task<EmployeeEntity> AddEmployee(string name, string surname, int age, string sex, string position, string phone, int departmentId);
+        Task<EmployeeEntity> AddEmployee(EmployeeEntity employee);
         Task<List<EmployeeEntity>> GetEmployees();
         Task<EmployeeEntity> GetEmployee(int id);
         Task<EmployeeEntity> PutEmployee(int id, EmployeeEntity employee);

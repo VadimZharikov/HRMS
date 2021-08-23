@@ -20,9 +20,9 @@ namespace HRMS.BLL.Services
             this._mapper = mapper;
         }
 
-        public async Task<bool> AddDepartment(string departmentName)
+        public async Task<bool> AddDepartment(Department department)
         {
-            var result = await department.AddDepartment(departmentName);
+            var result = await this.department.AddDepartment(_mapper.Map<Department, DepartmentEntity>(department));
             if(result.DepartmentId > 0)
             {
                 return true;

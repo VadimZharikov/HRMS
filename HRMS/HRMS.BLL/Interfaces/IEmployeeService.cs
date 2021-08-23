@@ -6,7 +6,7 @@ namespace HRMS.BLL.Interfaces
 {
     public interface IEmployeeService
     {
-        public Task<bool> AddEmployee(string name, string surname, int age, string sex, string position, string phone, int departmentId);
+        public Task<bool> AddEmployee(Employee employee);
         public Task<List<Employee>> GetEmployees();
         public Task<Employee> GetEmployee(int id);
         public Task<bool> PutEmployee(int id, Employee employee);

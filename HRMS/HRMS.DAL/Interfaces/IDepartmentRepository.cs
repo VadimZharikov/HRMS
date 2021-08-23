@@ -6,7 +6,7 @@ namespace HRMS.DAL.Interfaces
 {
     public interface IDepartmentRepository
     {
-        Task<DepartmentEntity> AddDepartment(string departmentName);
+        Task<DepartmentEntity> AddDepartment(DepartmentEntity department);
         Task<List<DepartmentEntity>> GetDepartments();
         Task<DepartmentEntity> GetDepartment(int id);
         Task<DepartmentEntity> PutDepartment(int id, DepartmentEntity department);

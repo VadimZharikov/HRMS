@@ -16,15 +16,11 @@ namespace HRMS.DAL.Repositories
             this._context = context;
         }
 
-        public async Task<DepartmentEntity> AddDepartment(string departmentName)
+        public async Task<DepartmentEntity> AddDepartment(DepartmentEntity department)
         {
-            DepartmentEntity newDepartment = new DepartmentEntity()
-            {
-                DepartmentName = departmentName
-            };
-            await _context.Departments.AddAsync(newDepartment);
+            await _context.Departments.AddAsync(department);
             await _context.SaveChangesAsync();
-            return newDepartment;
+            return department;
         }
 
         public async Task<List<DepartmentEntity>> GetDepartments()
