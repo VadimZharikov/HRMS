@@ -13,11 +13,13 @@ namespace HRMS.BLL.Services
     {
         private IEmployeeRepository employee;
         private IMapper _mapper;
+        IEnumerable<IPermissionStrategy> _strategies;
 
-        public EmployeeService(IEmployeeRepository _employee, IMapper mapper)
+        public EmployeeService(IEmployeeRepository _employee, IMapper mapper, IEnumerable<IPermissionStrategy> strategies)
         {
             this.employee = _employee;
             this._mapper = mapper;
+            this._strategies = strategies;
         }
 
         public async Task<bool> AddEmployee(Employee employee)
@@ -33,33 +35,15 @@ namespace HRMS.BLL.Services
         public async Task<List<Employee>> GetEmployees()
         {
             List<Employee> employees = _mapper.Map<List<EmployeeEntity>, List<Employee>>(await employee.GetEmployees());
-            Permissions permissions;
             employees.ForEach(newEmployee =>
             {
-                switch (newEmployee.DepartmentId)
+                foreach (var strategy in _strategies)
                 {
-                    case 1:
-                        {
-                            permissions = Permissions.Read | Permissions.Write | Permissions.Delete;
-                            break;
-                        }
-                    case 2:
-                        {
-                            permissions = Permissions.Read | Permissions.Write;
-                            break;
-                        }
-                    case 3:
-                        {
-                            permissions = Permissions.Read;
-                            break;
-                        }
-                    default:
-                        {
-                            permissions = Permissions.None;
-                            break;
-                        }
+                    if (strategy.IsSuitable(newEmployee))
+                    {
+                        strategy.Assign(newEmployee);
+                    }
                 }
-                newEmployee.permissions = permissions;
             });
             return employees;
         }
@@ -67,31 +51,13 @@ namespace HRMS.BLL.Services
         public async Task<Employee> GetEmployee(int id)
         {
             Employee newEmployee = _mapper.Map<EmployeeEntity, Employee>(await employee.GetEmployee(id));
-            Permissions permissions;
-            switch (newEmployee.DepartmentId)
+            foreach (var strategy in _strategies)
             {
-                case 1:
-                    {
-                        permissions = Permissions.Read | Permissions.Write | Permissions.Delete;
-                        break;
-                    }
-                case 2:
-                    {
-                        permissions = Permissions.Read | Permissions.Write;
-                        break;
-                    }
-                case 3:
-                    {
-                        permissions = Permissions.Read;
-                        break;
-                    }
-                default:
-                    {
-                        permissions = Permissions.None;
-                        break;
-                    }
+                if (strategy.IsSuitable(newEmployee))
+                {
+                    strategy.Assign(newEmployee);
+                }
             }
-            newEmployee.permissions = permissions;
             return newEmployee;
         }
 
