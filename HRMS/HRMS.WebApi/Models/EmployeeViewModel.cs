@@ -1,5 +1,16 @@
-﻿namespace HRMS.WebApi.Models
+﻿using System;
+using System.Text.Json.Serialization;
+
+namespace HRMS.WebApi.Models
 {
+    [Flags]
+    public enum Permissions
+    {
+        None = 0,
+        Read = 0x001,
+        Write = 0x010,
+        Delete = 0x100,
+    };
     public class EmployeeViewModel
     {
         public int EmployeeId { get; set; }
@@ -10,5 +21,7 @@
         public string Position { get; set; }
         public string Phone { get; set; }
         public int DepartmentId { get; set; }
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public Permissions permissions { get; set; }
     }
 }

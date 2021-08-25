@@ -1,5 +1,12 @@
 ﻿namespace HRMS.BLL.Entities
 {
+    public enum Permissions
+    {
+        None = 0,
+        Read = 0x001,
+        Write = 0x010,
+        Delete = 0x100,
+    };
     public class Employee
     {
         public int EmployeeId { get; set; }
@@ -10,5 +17,6 @@
         public string Position { get; set; }
         public string Phone { get; set; }
         public int DepartmentId { get; set; }
+        public Permissions permissions { get; set; }
     }
 }

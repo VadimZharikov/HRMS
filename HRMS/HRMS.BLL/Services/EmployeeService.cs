@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HRMS.BLL.Interfaces;
@@ -6,6 +5,7 @@ using HRMS.DAL.Interfaces;
 using HRMS.BLL.Entities;
 using AutoMapper;
 using HRMS.DAL.Entities;
+using HRMS.BLL.Entities;
 
 namespace HRMS.BLL.Services
 {
@@ -33,12 +33,65 @@ namespace HRMS.BLL.Services
         public async Task<List<Employee>> GetEmployees()
         {
             List<Employee> employees = _mapper.Map<List<EmployeeEntity>, List<Employee>>(await employee.GetEmployees());
+            Permissions permissions;
+            employees.ForEach(newEmployee =>
+            {
+                switch (newEmployee.DepartmentId)
+                {
+                    case 1:
+                        {
+                            permissions = Permissions.Read | Permissions.Write | Permissions.Delete;
+                            break;
+                        }
+                    case 2:
+                        {
+                            permissions = Permissions.Read | Permissions.Write;
+                            break;
+                        }
+                    case 3:
+                        {
+                            permissions = Permissions.Read;
+                            break;
+                        }
+                    default:
+                        {
+                            permissions = Permissions.None;
+                            break;
+                        }
+                }
+                newEmployee.permissions = permissions;
+            });
             return employees;
         }
 
         public async Task<Employee> GetEmployee(int id)
         {
             Employee newEmployee = _mapper.Map<EmployeeEntity, Employee>(await employee.GetEmployee(id));
+            Permissions permissions;
+            switch (newEmployee.DepartmentId)
+            {
+                case 1:
+                    {
+                        permissions = Permissions.Read | Permissions.Write | Permissions.Delete;
+                        break;
+                    }
+                case 2:
+                    {
+                        permissions = Permissions.Read | Permissions.Write;
+                        break;
+                    }
+                case 3:
+                    {
+                        permissions = Permissions.Read;
+                        break;
+                    }
+                default:
+                    {
+                        permissions = Permissions.None;
+                        break;
+                    }
+            }
+            newEmployee.permissions = permissions;
             return newEmployee;
         }
 

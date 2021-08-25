@@ -5,6 +5,7 @@ using HRMS.WebApi.Models;
 using HRMS.BLL.Interfaces;
 using AutoMapper;
 using HRMS.BLL.Entities;
+using Newtonsoft.Json.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,8 +27,8 @@ namespace HRMS.WebApi.Controllers
         [HttpGet("{id}")]
         public async Task<EmployeeViewModel> GetEmployee(int id)
         {
-            var employee = await employeeService.GetEmployee(id);
-            return _mapper.Map<Employee, EmployeeViewModel>(employee);
+            var employee = _mapper.Map <Employee, EmployeeViewModel>(await employeeService.GetEmployee(id));
+            return employee;
         }
 
         // GET api/<EmployeesController>/5
