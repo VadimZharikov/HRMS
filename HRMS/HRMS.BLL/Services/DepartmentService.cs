@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HRMS.BLL.Interfaces;
@@ -6,6 +5,7 @@ using HRMS.DAL.Interfaces;
 using HRMS.BLL.Entities;
 using AutoMapper;
 using HRMS.DAL.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace HRMS.BLL.Services
 {
@@ -13,11 +13,13 @@ namespace HRMS.BLL.Services
     {
         private IDepartmentRepository department;
         private IMapper _mapper;
+        private ILogger<DepartmentService> _logger;
 
-        public DepartmentService(IDepartmentRepository _department, IMapper mapper)
+        public DepartmentService(IDepartmentRepository _department, IMapper mapper, ILogger<DepartmentService> logger)
         {
             this.department = _department;
             this._mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<bool> AddDepartment(Department department)
@@ -25,6 +27,7 @@ namespace HRMS.BLL.Services
             var result = await this.department.AddDepartment(_mapper.Map<Department, DepartmentEntity>(department));
             if(result.DepartmentId > 0)
             {
+                _logger.LogInformation($"Department {result.DepartmentId} - {result.DepartmentName} was added");
                 return true;
             }
             return false;
@@ -52,6 +55,7 @@ namespace HRMS.BLL.Services
             var result = await this.department.PutDepartment(id, _mapper.Map<Department, DepartmentEntity>(department));
             if (result.DepartmentId > 0)
             {
+                _logger.LogInformation($"Department {result.DepartmentId} - {result.DepartmentName} was updated");
                 return true;
             }
             return false;
@@ -62,6 +66,7 @@ namespace HRMS.BLL.Services
             var result = await department.DeleteDepartment(id);
             if (result.DepartmentId > 0)
             {
+                _logger.LogInformation($"Department {result.DepartmentId} - {result.DepartmentName} was deleted");
                 return true;
             }
             return false;

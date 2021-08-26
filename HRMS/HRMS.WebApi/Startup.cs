@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Serilog;
+using HRMS.WebApi.DI;
 
 namespace HRMS.WebApi
 {
@@ -30,7 +32,7 @@ namespace HRMS.WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HRMS.WebApi", Version = "v1" });
             });
 
-            services.AddLogging();
+            services.AddSerilogServices(new LoggerConfiguration());
             services.AddAutoMapper(Assembly.Load("HRMS.BLL"), Assembly.Load("HRMS.WebApi")
             );
             services.AddFluentValidation();

@@ -5,7 +5,7 @@ using HRMS.DAL.Interfaces;
 using HRMS.BLL.Entities;
 using AutoMapper;
 using HRMS.DAL.Entities;
-using HRMS.BLL.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace HRMS.BLL.Services
 {
@@ -14,12 +14,14 @@ namespace HRMS.BLL.Services
         private IEmployeeRepository employee;
         private IMapper _mapper;
         IEnumerable<IPermissionStrategy> _strategies;
+        ILogger<EmployeeService> _logger;
 
-        public EmployeeService(IEmployeeRepository _employee, IMapper mapper, IEnumerable<IPermissionStrategy> strategies)
+        public EmployeeService(IEmployeeRepository _employee, IMapper mapper, IEnumerable<IPermissionStrategy> strategies, ILogger<EmployeeService> logger)
         {
             this.employee = _employee;
             this._mapper = mapper;
             this._strategies = strategies;
+            this._logger = logger;
         }
 
         public async Task<bool> AddEmployee(Employee employee)
@@ -27,6 +29,7 @@ namespace HRMS.BLL.Services
             var result = await this.employee.AddEmployee(_mapper.Map<Employee, EmployeeEntity>(employee));
             if(result.EmployeeId > 0)
             {
+                _logger.LogInformation($"Employee {result.EmployeeId} - {result.Name} was added");
                 return true;
             }
             return false;
@@ -71,6 +74,7 @@ namespace HRMS.BLL.Services
             var result = await this.employee.PutEmployee(id, _mapper.Map<Employee, EmployeeEntity>(employee));
             if (result.EmployeeId > 0)
             {
+                _logger.LogInformation($"Employee {result.EmployeeId} - {result.Name} was updated");
                 return true;
             }
             return false;
@@ -81,6 +85,7 @@ namespace HRMS.BLL.Services
             var result = await employee.DeleteEmployee(id);
             if (result.EmployeeId > 0)
             {
+                _logger.LogInformation($"Employee {result.EmployeeId} - {result.Name} was deleted");
                 return true;
             }
             return false;

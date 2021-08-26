@@ -3,6 +3,7 @@ using HRMS.BLL.Entities;
 using HRMS.BLL.Interfaces;
 using HRMS.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
