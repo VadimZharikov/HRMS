@@ -7,7 +7,7 @@ namespace HRMS.DAL.DataContext
     {
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-
+            Database.Migrate();
         }
 
         public DbSet<EmployeeEntity> Employees { get; set; }
