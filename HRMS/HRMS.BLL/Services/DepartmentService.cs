@@ -52,7 +52,7 @@ namespace HRMS.BLL.Services
                 return false;
             }
 
-            var result = await this.department.PutDepartment(id, _mapper.Map<Department, DepartmentEntity>(department));
+            var result = await this.department.UpdateDepartment(_mapper.Map<Department, DepartmentEntity>(department));
             if (result.DepartmentId > 0)
             {
                 _logger.LogInformation($"Department {result.DepartmentId} - {result.DepartmentName} was updated");

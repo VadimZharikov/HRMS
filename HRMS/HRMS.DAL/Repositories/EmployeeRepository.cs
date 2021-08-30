@@ -25,18 +25,14 @@ namespace HRMS.DAL.Repositories
 
         public async Task<List<EmployeeEntity>> GetEmployees()
         {
-            List<EmployeeEntity> employees = new List<EmployeeEntity>();
-            employees = await _context.Employees.ToListAsync();
-            return employees;
+            return await _context.Employees.ToListAsync();
         }
         public async Task<EmployeeEntity> GetEmployee(int id)
         {
-            EmployeeEntity employee = new EmployeeEntity();
-            employee = await _context.Employees.FindAsync(id);
-            return employee;
+            return await _context.Employees.FindAsync(id);
         }
 
-        public async Task<EmployeeEntity> PutEmployee(int id, EmployeeEntity employee)
+        public async Task<EmployeeEntity> UpdateEmployee(EmployeeEntity employee)
         {
             _context.Entry(employee).State = EntityState.Modified;
             await _context.SaveChangesAsync();

@@ -9,7 +9,7 @@ namespace HRMS.DAL.Interfaces
         Task<DepartmentEntity> AddDepartment(DepartmentEntity department);
         Task<List<DepartmentEntity>> GetDepartments();
         Task<DepartmentEntity> GetDepartment(int id);
-        Task<DepartmentEntity> PutDepartment(int id, DepartmentEntity department);
+        Task<DepartmentEntity> UpdateDepartment(DepartmentEntity department);
         Task<DepartmentEntity> DeleteDepartment(int id);
         Task<bool> DepartmentExists(int id);
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HRMS.DAL.Repositories
 {
-    class DepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository : IDepartmentRepository
     {
         private DatabaseContext _context;
 
@@ -25,18 +25,14 @@ namespace HRMS.DAL.Repositories
 
         public async Task<List<DepartmentEntity>> GetDepartments()
         {
-            List<DepartmentEntity> departments = new List<DepartmentEntity>();
-            departments = await _context.Departments.ToListAsync();
-            return departments;
+            return await _context.Departments.ToListAsync();
         }
         public async Task<DepartmentEntity> GetDepartment(int id)
         {
-            DepartmentEntity department = new DepartmentEntity();
-            department = await _context.Departments.FindAsync(id);
-            return department;
+            return await _context.Departments.FindAsync(id);
         }
 
-        public async Task<DepartmentEntity> PutDepartment(int id, DepartmentEntity department)
+        public async Task<DepartmentEntity> UpdateDepartment(DepartmentEntity department)
         {
             _context.Entry(department).State = EntityState.Modified;
             await _context.SaveChangesAsync();

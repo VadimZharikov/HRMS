@@ -9,7 +9,7 @@ namespace HRMS.DAL.Interfaces
         Task<EmployeeEntity> AddEmployee(EmployeeEntity employee);
         Task<List<EmployeeEntity>> GetEmployees();
         Task<EmployeeEntity> GetEmployee(int id);
-        Task<EmployeeEntity> PutEmployee(int id, EmployeeEntity employee);
+        Task<EmployeeEntity> UpdateEmployee(EmployeeEntity employee);
         Task<EmployeeEntity> DeleteEmployee(int id);
         Task<bool> EmployeeExists(int id);
     }

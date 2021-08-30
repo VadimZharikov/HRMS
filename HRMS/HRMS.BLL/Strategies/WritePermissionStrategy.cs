@@ -3,7 +3,7 @@ using HRMS.BLL.Interfaces;
 
 namespace HRMS.BLL.Strategies
 {
-    class WritePemissionStrategy : IPermissionStrategy
+    public class WritePemissionStrategy : IPermissionStrategy
     {
         public void Assign(Employee employee)
         {

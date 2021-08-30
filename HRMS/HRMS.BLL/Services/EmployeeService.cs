@@ -71,7 +71,7 @@ namespace HRMS.BLL.Services
                 return false;
             }
 
-            var result = await this.employee.PutEmployee(id, _mapper.Map<Employee, EmployeeEntity>(employee));
+            var result = await this.employee.UpdateEmployee(_mapper.Map<Employee, EmployeeEntity>(employee));
             if (result.EmployeeId > 0)
             {
                 _logger.LogInformation($"Employee {result.EmployeeId} - {result.Name} was updated");
