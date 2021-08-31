@@ -1,0 +1,53 @@
+<form method="post" novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+  <input type="hidden" name="employeeId" [value]="service.formData.employeeId" />
+  <div class="form-row row">
+    <div class="form-group col-md-6">
+      <label>Name</label>
+      <input type="text" class="form-control form-control-lg"
+       placeholder="Name" name="Name" #Name="ngModel" [(ngModel)]="service.formData.name" required [class.invalid]="Name.invalid && Name.touched">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Surname</label>
+      <input type="text" class="form-control form-control-lg"
+       placeholder="Surname" name="Surname" #Surname="ngModel" [(ngModel)]="service.formData.surname" required [class.invalid]="Surname.invalid && Surname.touched">
+    </div>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-6">
+      <label>Sex</label>
+      <input type="text" class="form-control form-control-lg"
+       placeholder="Sex" name="Sex" #Sex="ngModel" [(ngModel)]="service.formData.sex" required [class.invalid]="Sex.invalid && Sex.touched">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Age</label>
+      <input type="text" class="form-control form-control-lg"
+       placeholder="Age" name="Age" #Age="ngModel" [(ngModel)]="service.formData.age" required [class.invalid]="Age.invalid && Age.touched">
+    </div>
+  </div>
+  <div class="form-row row">
+    <div class="form-group col-md-6">
+      <label>Position</label>
+      <input type="text" class="form-control form-control-lg"
+       placeholder="Position" name="Position" #Position="ngModel" [(ngModel)]="service.formData.position" required [class.invalid]="Position.invalid && Position.touched">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Phone</label>
+      <input type="text" class="form-control form-control-lg"
+       placeholder="Phone number" name="Phone" #Phone="ngModel" [(ngModel)]="service.formData.phone" required [class.invalid]="Phone.invalid && Phone.touched">
+    </div>
+    <div class="form-group col-md-6">
+      <label>DepartmentId</label>
+      <input type="text" class="form-control form-control-lg"
+       placeholder="Department ID" name="DepartmentId" #DepartmentId="ngModel" [(ngModel)]="service.formData.departmentId" required [class.invalid]="DepartmentId.invalid && DepartmentId.touched">
+    </div>
+    <div class="form-group col-md-6">
+      <label>Permissions</label>
+      <input type="text" class="form-control form-control-lg"
+       placeholder="Permissions" name="Permissions" #Permissions="ngModel"
+        [(ngModel)]="service.formData.permissions" readonly>
+    </div>
+  </div>
+  <div class="form-group text-center">
+    <button class="btn btn-info btn-lg btn-block col-md-12 mt-2" type="submit" [disabled]="form.invalid">Submit</button>
+  </div>
+</form>

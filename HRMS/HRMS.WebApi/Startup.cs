@@ -31,7 +31,7 @@ namespace HRMS.WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HRMS.WebApi", Version = "v1" });
             });
-
+            services.AddCors();
             services.AddSerilogServices(new LoggerConfiguration());
             services.AddAutoMapper(Assembly.Load("HRMS.BLL"), Assembly.Load("HRMS.WebApi")
             );
@@ -43,6 +43,12 @@ namespace HRMS.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(op =>
+            {
+                op.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
