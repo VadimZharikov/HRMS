@@ -5,12 +5,12 @@ using HRMS.WebApi.Models;
 using HRMS.BLL.Interfaces;
 using AutoMapper;
 using HRMS.BLL.Entities;
-using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authorization;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HRMS.WebApi.Controllers
 {
+    [Authorize(Policy = "BackFront")]
     [Route("api/Employee")]
     [ApiController]
     public class EmployeesController : ControllerBase

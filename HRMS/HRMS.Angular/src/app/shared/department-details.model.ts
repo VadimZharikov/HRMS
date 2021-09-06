@@ -1,4 +1,4 @@
 export class DepartmentDetails {
-	departmentId:number;
-	departmentName:number;
+	departmentId:number = 0;
+	departmentName:string = '';
 }

@@ -11,6 +11,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Serilog;
 using HRMS.WebApi.DI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace HRMS.WebApi
 {
@@ -26,6 +27,34 @@ namespace HRMS.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters.ValidateAudience = false;
+                o.Authority = "https://localhost:4800";
+                o.RequireHttpsMetadata = false;
+            });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ApiScope", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("scope", "ApiScope");
+                });
+                options.AddPolicy("FrontScope", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("scope", "FrontScope");
+                });
+                options.AddPolicy("BackFront", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim("scope", "FrontScope", "ApiScope");
+                });
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -45,9 +74,11 @@ namespace HRMS.WebApi
         {
             app.UseCors(op =>
             {
-                op.WithOrigins("http://localhost:4200")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
+                    op.WithOrigins(
+                            "http://localhost:4200"
+                        )
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
             });
             if (env.IsDevelopment())
             {
@@ -61,6 +92,7 @@ namespace HRMS.WebApi
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

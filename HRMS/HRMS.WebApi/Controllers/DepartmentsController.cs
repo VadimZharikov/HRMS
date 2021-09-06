@@ -3,12 +3,13 @@ using HRMS.BLL.Entities;
 using HRMS.BLL.Interfaces;
 using HRMS.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HRMS.WebApi.Controllers
 {
+    [Authorize(Policy = "BackFront")]
     [Route("api/[controller]")]
     [ApiController]
     public class DepartmentsController : ControllerBase

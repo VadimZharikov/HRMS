@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OAuthModule } from "angular-oauth2-oidc";
 
 import { RouterModule } from '@angular/router'
 import { ToastrModule } from 'ngx-toastr';
@@ -11,6 +12,8 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { EmployeeDetailsFormComponent } from './employee-details/employee-details-form/employee-details-form.component';
 import { DepartmentDetailsComponent } from './department-details/department-details.component';
 import { DepartmentDetailsFormComponent } from './department-details/department-details-form/department-details-form.component';
+import { ItemDetailsComponent } from './item-details/item-details.component';
+import { ItemDetailsFormComponent } from './item-details/item-details-form/item-details-form.component';
 
 @NgModule({
   declarations: [
@@ -18,17 +21,26 @@ import { DepartmentDetailsFormComponent } from './department-details/department-
     EmployeeDetailsComponent,
     EmployeeDetailsFormComponent,
     DepartmentDetailsComponent,
-    DepartmentDetailsFormComponent
+    DepartmentDetailsFormComponent,
+    ItemDetailsComponent,
+    ItemDetailsFormComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    OAuthModule.forRoot({
+      resourceServer: {
+      allowedUrls: ['https://localhost:5001', 'https://localhost:5200'],
+        sendAccessToken: true
+    }}),
     ToastrModule.forRoot(),
     RouterModule.forRoot([
       { path: 'employees', component: EmployeeDetailsComponent },
       { path: 'departments', component: DepartmentDetailsComponent },
+      { path: 'Inventory', component: ItemDetailsComponent },
+
     ])
   ],
   providers: [],
