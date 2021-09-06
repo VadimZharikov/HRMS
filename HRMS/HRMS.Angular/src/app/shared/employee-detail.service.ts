@@ -10,7 +10,7 @@ export class EmployeeDetailsService {
   constructor(private http:HttpClient) { }
 
   formData: EmployeeDetails = new EmployeeDetails();
-  readonly URL = 'https://localhost:5001/api/Employee';
+  readonly URL = 'https://localhost:5500/Employees';
   list : EmployeeDetails[];
 
   postEmployeeDetails(){

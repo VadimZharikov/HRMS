@@ -10,7 +10,7 @@ export class ItemDetailsService {
   constructor(private http:HttpClient) { }
 
   formData: ItemDetails = new ItemDetails();
-  readonly URL = 'https://localhost:5200/api/Items';
+  readonly URL = 'https://localhost:5500/Items';
   list : ItemDetails[];
 
   postItemDetails(){

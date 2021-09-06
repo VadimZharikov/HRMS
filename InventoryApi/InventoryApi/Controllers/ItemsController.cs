@@ -30,24 +30,6 @@ namespace InventoryApi.Controllers
         public async Task<List<ItemViewModel>> GetItems()
         {
             var items = await itemService.GetItems();
-            /*var client = new HttpClient();
-            var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest()
-            {
-                Address = "https://localhost:4800/connect/token",
-
-                ClientId = "InventoryApi",
-                ClientSecret = "511536EF-F270-4058-80CA-1C89C192F69A",
-
-                Scope = "ApiScope"
-            });
-            if (response.IsError) throw new Exception(response.Exception.Message);
-
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", response.AccessToken);
-
-
-            var res = await client.GetAsync("https://localhost:5001/api/employee");
-
-            return await res.Content.ReadAsStringAsync();*/
             return _mapper.Map<List<Item>, List<ItemViewModel>>(items);
         }
 
