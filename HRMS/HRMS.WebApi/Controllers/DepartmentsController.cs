@@ -14,8 +14,8 @@ namespace HRMS.WebApi.Controllers
     [ApiController]
     public class DepartmentsController : ControllerBase
     {
-        private IDepartmentService departmentService;
-        private IMapper _mapper;
+        private readonly IDepartmentService departmentService;
+        private readonly IMapper _mapper;
         public DepartmentsController(IDepartmentService departmentService, IMapper mapper)
         {
             this.departmentService = departmentService;

@@ -10,7 +10,8 @@ namespace HRMS.WebApi.Models
         Read = 0x001,
         Write = 0x010,
         Delete = 0x100,
-    };
+    }
+    #nullable disable
     public class EmployeeViewModel
     {
         public int EmployeeId { get; set; }

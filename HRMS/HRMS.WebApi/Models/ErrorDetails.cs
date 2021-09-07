@@ -2,6 +2,7 @@
 
 namespace HRMS.WebApi.Models
 {
+    #nullable disable
     public class ErrorDetails
     {
         public int StatusCode { get; set; }

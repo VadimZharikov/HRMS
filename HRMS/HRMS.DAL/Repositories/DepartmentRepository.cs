@@ -9,7 +9,7 @@ namespace HRMS.DAL.Repositories
 {
     public class DepartmentRepository : IDepartmentRepository
     {
-        private DatabaseContext _context;
+        private readonly DatabaseContext _context;
 
         public DepartmentRepository(DatabaseContext context)
         {

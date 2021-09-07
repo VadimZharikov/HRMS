@@ -7,6 +7,7 @@
         Write = 0x010,
         Delete = 0x100,
     };
+    #nullable disable
     public class Employee
     {
         public int EmployeeId { get; set; }

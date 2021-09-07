@@ -2,6 +2,7 @@
 
 namespace HRMS.DAL.Entities
 {
+    #nullable disable
     public class EmployeeEntity
     {
         [Key]

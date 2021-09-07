@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HRMS.DAL.Entities
 {
+    #nullable disable
     public class DepartmentEntity
     {
         [Key]

@@ -2,6 +2,7 @@
 
 namespace HRMS.BLL.Entities
 {
+    #nullable disable
     public class Department
     {
         [Key]

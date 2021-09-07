@@ -17,6 +17,7 @@ namespace HRMS.DAL.DataContext
             }
         }
 
+        #nullable disable
         public DbSet<EmployeeEntity> Employees { get; set; }
         public DbSet<DepartmentEntity> Departments { get; set; }
     }

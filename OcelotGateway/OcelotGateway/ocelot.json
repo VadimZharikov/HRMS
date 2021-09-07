@@ -1,6 +1,18 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/{anything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 4800
+        }
+      ],
+      "UpstreamPathTemplate": "/Identity/{anything}",
+      "RouteIsCaseSensitive": false
+    },
+    {
       "DownstreamPathTemplate": "/api/Departments",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
