@@ -3,7 +3,12 @@ Human Resource Management System
 
 ![dotnet workflow](https://github.com/nantonov/HRMS/actions/workflows/dotnet.yml/badge.svg)
 
-Schema:\
-![db schema](misc/dbschema.png)
+Architecture chart:\
+![APIChart](misc/APIChart.png)
 
-[Swagger UI](https://localhost:5001/swagger)
+Schemas:\
+![Identity](misc/Identity.png)
+![HRMS](misc/HRMS.png)
+![ItemApi](misc/ItemApi.png)
+
+[Angular](https://localhost:4200/)
