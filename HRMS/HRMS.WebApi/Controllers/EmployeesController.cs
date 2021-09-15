@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HRMS.WebApi.Controllers
 {
-    [Authorize(Policy = "BackFront")]
     [Route("api/Employee")]
     [ApiController]
     public class EmployeesController : ControllerBase
